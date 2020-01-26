@@ -4,7 +4,7 @@ from math import erf as m_erf
 # b ~= 2.4095
 
 def erf(x, b):
-    return 2/(1+e**(-b*x**2))-1
+    return 2/(1+e**(-b*x))-1
 
 def erfinv(y, b):
     # this is a rough approximation of erfinv which diverges
@@ -14,8 +14,8 @@ def erfinv(y, b):
     x = -log(2/(1+y)-1)/b
     return x
 
-def error(min, max):
-    pass
+def error(x, b):
+    return erf(x, b)-m_erf(x)
 
 
 def sgn(x):
@@ -23,3 +23,17 @@ def sgn(x):
         return -1
     else:
         return +1
+
+
+def integrate_error(min, max, step, b):
+    point = min
+    summ = 0
+    dx = step
+
+    while point < max:
+        derr = abs(error(point+step, b)-error(point, b))
+        summ += abs(error(point, b)*dx)+0.5*dx*derr
+
+        point+=step
+
+    return summ
