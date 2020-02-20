@@ -13,8 +13,8 @@ def main():
     step = 0.0005 # Step size of the integration function
 
     next_b = 2.405 # Through experimental data we knowm that b idealy lies somewhere between 2.40 and 2.41
-    gamma = 0.001 # Step size multiplier
-    precision = 0.0000001 # Desired precision of result
+    gamma = 0.01 # Step size multiplier
+    precision = 0.00000001 # Desired precision of result
     max_iter = 200000
 
     # Data for change analysis
